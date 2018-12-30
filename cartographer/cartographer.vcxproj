@@ -152,9 +152,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="H2MOD\TitlePatches.cpp" />
+    <ClCompile Include="Utils\UtilHook.cpp" />
+    <ClCompile Include="xlive\xlive.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dllMain.h" />
+    <ClInclude Include="H2MOD\TitlePatches.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Utils\UtilHook.h" />
+    <ClInclude Include="xlive\xlive.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="cartographer.rc" />

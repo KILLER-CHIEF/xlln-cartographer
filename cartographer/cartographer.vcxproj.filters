@@ -13,15 +13,45 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\xlive">
+      <UniqueIdentifier>{cc4c19cb-e4bf-49d9-84ae-e7cfb9209412}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{e428f824-a9b5-4486-b964-a45df6c0654b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\H2MOD">
+      <UniqueIdentifier>{34f2e735-1663-42e2-8f93-83d69ca69e0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="xlive\xlive.cpp">
+      <Filter>Source Files\xlive</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\UtilHook.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\TitlePatches.cpp">
+      <Filter>Source Files\H2MOD</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xlive\xlive.h">
+      <Filter>Source Files\xlive</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\UtilHook.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="dllMain.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\TitlePatches.h">
+      <Filter>Source Files\H2MOD</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
