@@ -2,6 +2,7 @@
 #include "xlive.h"
 #include "../Utils/UtilHook.h"
 #include "../H2MOD/TitlePatches.h"
+#include "../H2MOD/Menus/CustomMenu.h"
 
 // #41140
 typedef DWORD(WINAPI *tXLLNLogin)(DWORD dwUserIndex, BOOL bLiveEnabled, DWORD dwUserId, const CHAR *szUsername);
@@ -56,8 +57,14 @@ typedef DWORD(WINAPI *tXShowGuideUI)(DWORD dwUserIndex);
 static tXShowGuideUI XShowGuideUI;
 static DWORD WINAPI XShowGuideUIHook(DWORD dwUserIndex)
 {
-	DWORD result = XShowGuideUI(dwUserIndex);
-	//DWORD result = XLLNLogout(0);
+	DWORD result;
+	if (CMGuideMenu()) {
+		result = ERROR_SUCCESS;
+	}
+	else {
+		result = XShowGuideUI(dwUserIndex);
+		//DWORD result = XLLNLogout(0);
+	}
 	return result;
 }
 static DWORD XShowGuideUIHookHelper = (DWORD)XShowGuideUIHook;

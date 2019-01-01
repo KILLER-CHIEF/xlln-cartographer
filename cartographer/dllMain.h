@@ -9,6 +9,7 @@ extern HMODULE hTitleModule;
 #define SERVER_11091 5
 #define SERVER_11122 6
 extern DWORD Title_Version;
+extern wchar_t lpwszTitleModulePath[MAX_PATH];
 
 DWORD GetOffsetAddress(DWORD dwTitleVersion, DWORD dwOffset);
 DWORD GetOffsetAddress(DWORD dwOffsetC_11081, DWORD dwOffsetC_11091, DWORD dwOffsetC_11122);

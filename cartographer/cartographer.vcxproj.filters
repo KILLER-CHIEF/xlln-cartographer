@@ -22,6 +22,33 @@
     <Filter Include="Source Files\H2MOD">
       <UniqueIdentifier>{34f2e735-1663-42e2-8f93-83d69ca69e0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\H2MOD\Menus">
+      <UniqueIdentifier>{29603cf0-3265-4245-85b9-217495dd3e5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\H2MOD\Menus\Credits">
+      <UniqueIdentifier>{d5865424-b8cd-4dd1-8b4c-323b0003ca07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\H2MOD\Language">
+      <UniqueIdentifier>{5e0f2830-9c52-4c02-bf65-ea433d12bd6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\H2MOD\Config">
+      <UniqueIdentifier>{26331cc4-85c7-4934-a0e0-5c5c8e911ac2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\H2MOD\Menus\Guide">
+      <UniqueIdentifier>{1af1c5f0-95b1-4c36-924c-5719fdc62096}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\H2MOD\Menus\Error">
+      <UniqueIdentifier>{7966b7da-bc98-4ee8-94db-9732b7d4a96b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\H2MOD\Menus\VirtualKB">
+      <UniqueIdentifier>{2bc2a4fb-fc51-4801-8566-9827f67ca962}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\H2MOD\Menus\AdvSettings">
+      <UniqueIdentifier>{95d5b398-3549-4cb5-852c-93990fb607e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\H2MOD\Menus\AdvSettings\Language">
+      <UniqueIdentifier>{90db689a-2a7a-49d9-83b7-b68deee2cd6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -35,6 +62,45 @@
     </ClCompile>
     <ClCompile Include="H2MOD\TitlePatches.cpp">
       <Filter>Source Files\H2MOD</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Menus\CustomMenuFunctions.cpp">
+      <Filter>Source Files\H2MOD\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Menus\CustomMenu.cpp">
+      <Filter>Source Files\H2MOD\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Language\CustomLanguage.cpp">
+      <Filter>Source Files\H2MOD\Language</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Config\Config.cpp">
+      <Filter>Source Files\H2MOD\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Utils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Language\CustomLabels.cpp">
+      <Filter>Source Files\H2MOD\Language</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Menus\Guide\Guide.cpp">
+      <Filter>Source Files\H2MOD\Menus\Guide</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Menus\Error\Error.cpp">
+      <Filter>Source Files\H2MOD\Menus\Error</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Menus\VirtualKB\VirtualKB.cpp">
+      <Filter>Source Files\H2MOD\Menus\VirtualKB</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Menus\Credits\Credits.cpp">
+      <Filter>Source Files\H2MOD\Menus\Credits</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Menus\AdvSettings\AdvSettings.cpp">
+      <Filter>Source Files\H2MOD\Menus\AdvSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Menus\AdvSettings\Language\LanguageMain.cpp">
+      <Filter>Source Files\H2MOD\Menus\AdvSettings\Language</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Menus\AdvSettings\Language\LanguageSub.cpp">
+      <Filter>Source Files\H2MOD\Menus\AdvSettings\Language</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +118,45 @@
     </ClInclude>
     <ClInclude Include="H2MOD\TitlePatches.h">
       <Filter>Source Files\H2MOD</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Menus\CustomMenuFunctions.h">
+      <Filter>Source Files\H2MOD\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Menus\CustomMenu.h">
+      <Filter>Source Files\H2MOD\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Language\CustomLanguage.h">
+      <Filter>Source Files\H2MOD\Language</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Config\Config.h">
+      <Filter>Source Files\H2MOD\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Utils.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Language\CustomLabels.h">
+      <Filter>Source Files\H2MOD\Language</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Menus\Guide\Guide.h">
+      <Filter>Source Files\H2MOD\Menus\Guide</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Menus\Error\Error.h">
+      <Filter>Source Files\H2MOD\Menus\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Menus\VirtualKB\VirtualKB.h">
+      <Filter>Source Files\H2MOD\Menus\VirtualKB</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Menus\Credits\Credits.h">
+      <Filter>Source Files\H2MOD\Menus\Credits</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Menus\AdvSettings\AdvSettings.h">
+      <Filter>Source Files\H2MOD\Menus\AdvSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Menus\AdvSettings\Language\LanguageMain.h">
+      <Filter>Source Files\H2MOD\Menus\AdvSettings\Language</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Menus\AdvSettings\Language\LanguageSub.h">
+      <Filter>Source Files\H2MOD\Menus\AdvSettings\Language</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
