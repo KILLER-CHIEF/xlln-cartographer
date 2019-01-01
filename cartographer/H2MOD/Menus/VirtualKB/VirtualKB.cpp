@@ -510,7 +510,7 @@ static char __stdcall sub_23CF88_CM(int thisptr, int* a2) //__thiscall
 	}
 	if (v20) {
 		if (VKbMenuType >= 32 && VKbMenuType < 64 && VKbMenuType & 0b10000) {
-			wchar_t* returnString = (wchar_t*)*(DWORD*)(thisptr + 0xC64);
+			wchar_t* returnString = (wchar_t*)*(DWORD*)((BYTE*)v4 + 0xC64);
 			DWORD returnStrBuflen = wcslen(returnString) + 1;
 			char* end = (char*)malloc(sizeof(char) * returnStrBuflen);
 			wcstombs2(end, returnString, returnStrBuflen);
@@ -785,9 +785,9 @@ static int __cdecl sub_23C72F_CM(int a1) {
 static void PoSmbstowcs(wchar_t* destsrc, int maxCount) {
 	DWORD endbuflen = sizeof(wchar_t) * maxCount;
 	wchar_t* end = (wchar_t*)malloc(endbuflen);
-	size_t dumb = 0;
-	mbstowcs_s(&dumb, end, endbuflen, (char*)destsrc, maxCount);
-	memcpy_s(destsrc, endbuflen, end, dumb);
+	size_t outSize = 0;
+	mbstowcs_s(&outSize, end, maxCount, (char*)destsrc, maxCount);
+	memcpy_s(destsrc, endbuflen, end, endbuflen);
 	destsrc[maxCount - 1] = 0;
 	free(end);
 }
