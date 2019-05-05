@@ -24,6 +24,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>cartographer</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>xlln-cartographer</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -96,7 +97,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)BinOut\xlive.lib;Version.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)BinOut\xlive.lib;$(SolutionDir)BinOut\xlln\modules\xlln-online.lib;Version.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -129,7 +130,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)BinOut\xlive.lib;Version.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)BinOut\xlive.lib;$(SolutionDir)BinOut\xlln\modules\xlln-online.lib;Version.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -151,10 +152,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="dllMain.cpp" />
+    <ClCompile Include="H2MOD\Config\Accounts.cpp" />
     <ClCompile Include="H2MOD\Config\Config.cpp" />
     <ClCompile Include="H2MOD\Language\CustomLabels.cpp" />
     <ClCompile Include="H2MOD\Language\CustomLanguage.cpp" />
+    <ClCompile Include="H2MOD\Menus\Accounts\AccountAdd.cpp" />
+    <ClCompile Include="H2MOD\Menus\Accounts\AccountCreate.cpp" />
+    <ClCompile Include="H2MOD\Menus\Accounts\AccountHelper.cpp" />
+    <ClCompile Include="H2MOD\Menus\Accounts\AccountList.cpp" />
+    <ClCompile Include="H2MOD\Menus\Accounts\AccountManagement.cpp" />
     <ClCompile Include="H2MOD\Menus\AdvSettings\AdvSettings.cpp" />
     <ClCompile Include="H2MOD\Menus\AdvSettings\Language\LanguageMain.cpp" />
     <ClCompile Include="H2MOD\Menus\AdvSettings\Language\LanguageSub.cpp" />
@@ -163,7 +170,9 @@
     <ClCompile Include="H2MOD\Menus\CustomMenuFunctions.cpp" />
     <ClCompile Include="H2MOD\Menus\Error\Error.cpp" />
     <ClCompile Include="H2MOD\Menus\Guide\Guide.cpp" />
+    <ClCompile Include="H2MOD\Menus\NetworkType\NetworkType.cpp" />
     <ClCompile Include="H2MOD\Menus\VirtualKB\VirtualKB.cpp" />
+    <ClCompile Include="H2MOD\RunLoop\RunLoop.cpp" />
     <ClCompile Include="H2MOD\TitlePatches.cpp" />
     <ClCompile Include="Utils\UtilHook.cpp" />
     <ClCompile Include="Utils\Utils.cpp" />
@@ -171,9 +180,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dllMain.h" />
+    <ClInclude Include="H2MOD\Config\Accounts.h" />
     <ClInclude Include="H2MOD\Config\Config.h" />
     <ClInclude Include="H2MOD\Language\CustomLabels.h" />
     <ClInclude Include="H2MOD\Language\CustomLanguage.h" />
+    <ClInclude Include="H2MOD\Menus\Accounts\AccountAdd.h" />
+    <ClInclude Include="H2MOD\Menus\Accounts\AccountCreate.h" />
+    <ClInclude Include="H2MOD\Menus\Accounts\AccountHelper.h" />
+    <ClInclude Include="H2MOD\Menus\Accounts\AccountList.h" />
+    <ClInclude Include="H2MOD\Menus\Accounts\AccountManagement.h" />
     <ClInclude Include="H2MOD\Menus\AdvSettings\AdvSettings.h" />
     <ClInclude Include="H2MOD\Menus\AdvSettings\Language\LanguageMain.h" />
     <ClInclude Include="H2MOD\Menus\AdvSettings\Language\LanguageSub.h" />
@@ -182,7 +197,9 @@
     <ClInclude Include="H2MOD\Menus\CustomMenuFunctions.h" />
     <ClInclude Include="H2MOD\Menus\Error\Error.h" />
     <ClInclude Include="H2MOD\Menus\Guide\Guide.h" />
+    <ClInclude Include="H2MOD\Menus\NetworkType\NetworkType.h" />
     <ClInclude Include="H2MOD\Menus\VirtualKB\VirtualKB.h" />
+    <ClInclude Include="H2MOD\RunLoop\RunLoop.h" />
     <ClInclude Include="H2MOD\TitlePatches.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Utils\UtilHook.h" />

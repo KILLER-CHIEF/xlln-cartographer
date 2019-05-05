@@ -302,8 +302,8 @@ int HostnameToIp(char* hostname, char* ip, DWORD buflen)
 	struct hostent *he;
 	struct in_addr **addr_list;
 	int i;
-	WSADATA wsaData;
-	WSAStartup(MAKEWORD(2, 2), &wsaData);
+	//WSADATA wsaData;
+	//WSAStartup(MAKEWORD(2, 2), &wsaData);
 	if ((he = gethostbyname(hostname)) == NULL) {
 		return WSAGetLastError();
 	}

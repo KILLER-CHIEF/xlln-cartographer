@@ -60,10 +60,11 @@ static int __fastcall widget_title_description(int a1, DWORD _EDX, char a2)
 	return sub_2111ab_CMLTD(a1, a2, CMLabelMenuId_Language, 0xFFFFFFF3, 0xFFFFFFF4);
 }
 
-static bool widget_button_handler(int button_id)
+static int __fastcall widget_button_handler(void *thisptr, DWORD _EDX, int a2, DWORD *a3)
 {
+	unsigned __int16 button_id = *a3 & 0xFFFF;
 	setCustomLanguage(CM_Language_Main == -1 ? cm_lang_other_lang_map[button_id] : CM_Language_Main, cm_lang_variant_map[button_id]);
-	return false;
+	return CM_PressButtonAnimation(thisptr);
 }
 
 static int __fastcall widget_preselected_button(DWORD a1, DWORD _EDX)
@@ -94,8 +95,7 @@ bool CustomMenuCall_LanguageSub(int langMain)
 	CM_Language_Main = langMain;
 	CM_Language_Sub_Setup_Buttons();
 	if (Language_Sub_Count > 0) {
-		int WgitScreenfunctionPtr = (int)(widget_call_head);
-		CallWgit(WgitScreenfunctionPtr);
+		CallWidget(widget_call_head);
 		return true;
 	}
 	else {

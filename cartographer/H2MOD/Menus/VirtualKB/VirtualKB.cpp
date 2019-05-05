@@ -792,7 +792,7 @@ static void PoSmbstowcs(wchar_t* destsrc, int maxCount) {
 	free(end);
 }
 
-void GSCustomMenuCall_VKeyboard_Inner(wchar_t* textBuffer, __int16 textBufferLen, WORD charsAllowed, int menuIdTitle, int title, int menuIdDesc, int description)
+void CustomMenuCall_VKeyboard_Inner(wchar_t* textBuffer, __int16 textBufferLen, WORD charsAllowed, int menuIdTitle, int title, int menuIdDesc, int description)
 {
 	char* lblTitle = H2CustomLanguageGetLabel(menuIdTitle, title);
 	char* lblDesc = H2CustomLanguageGetLabel(menuIdDesc, description);

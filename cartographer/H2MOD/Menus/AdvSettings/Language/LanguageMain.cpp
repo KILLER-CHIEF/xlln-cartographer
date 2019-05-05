@@ -40,31 +40,28 @@ static int __fastcall widget_title_description(int a1, DWORD _EDX, char a2)
 	return sub_2111ab_CMLTD(a1, a2, CMLabelMenuId_Language, 0xFFFFFFF0, 0xFFFFFFF1);
 }
 
-static bool widget_button_handler(int button_id)
+static int __fastcall widget_button_handler(void *thisptr, DWORD _EDX, int a2, DWORD *a3)
 {
+	unsigned __int16 button_id = *a3 & 0xFFFF;
+	
 	if (button_id == 0) {
 		setCustomLanguage(-1);
-		return true;
 	}
 	else if (button_id > 0 && button_id < 2 + 8) {
 		CustomMenuCall_LanguageSub(button_id - 2);
-		return false;
 	}
 	else if (button_id == 2 + 8 + 0) {
 		if (!CLReloadCustomLanguages()) {
 			CustomMenuCall_Error_Inner(CMLabelMenuId_Error, 6, 7);
 		}
-		return false;
 	}
 	else if (button_id == 2 + 8 + 1) {
 		CLSaveCustomLanguages();
-		return true;
 	}
 	else if (button_id == 2 + 8 + 2) {
 		toggleLanguageCapture();
-		return false;
 	}
-	return false;
+	return CM_PressButtonAnimation(thisptr);
 }
 
 static int __fastcall widget_preselected_button(DWORD a1, DWORD _EDX)
@@ -93,6 +90,5 @@ void CMSetupVFTables_LanguageMain()
 
 void CustomMenuCall_LanguageMain()
 {
-	int WgitScreenfunctionPtr = (int)(widget_call_head);
-	CallWgit(WgitScreenfunctionPtr);
+	CallWidget(widget_call_head);
 }

@@ -22,15 +22,21 @@ static int __fastcall widget_title_description(int a1, DWORD _EDX, char a2)
 }
 
 void CustomMenuCall_Error_Inner();
-static bool widget_button_handler(int button_id) {
+static int __fastcall widget_button_handler(void *thisptr, DWORD _EDX, int a2, DWORD *a3)
+{
+	unsigned __int16 button_id = *a3 & 0xFFFF;
 	if (button_id == 0) {
 		CustomMenuCall_Error_Inner();
 	}
 	else if (button_id == 1) {
-		wchar_t* bufferLobbyName = (wchar_t*)H2CustomLanguageGetLabel(CMLabelMenuId_AdvLobbySettings, 0xFFFFF001);
-		GSCustomMenuCall_VKeyboard_Inner(bufferLobbyName, 32, 0b11, CMLabelMenuId_AdvLobbySettings, 0xFFFFFF02, CMLabelMenuId_AdvLobbySettings, 0xFFFFFF03);
+		CM_CloseMenuStack();
+		return false;
 	}
-	return false;
+	else if (button_id == 2) {
+		wchar_t* bufferLobbyName = (wchar_t*)H2CustomLanguageGetLabel(CMLabelMenuId_AdvLobbySettings, 0xFFFFF001);
+		CustomMenuCall_VKeyboard_Inner(bufferLobbyName, 32, 0b11, CMLabelMenuId_AdvLobbySettings, 0xFFFFFF02, CMLabelMenuId_AdvLobbySettings, 0xFFFFFF03);
+	}
+	return CM_PressButtonAnimation(thisptr);
 }
 
 static int __fastcall widget_preselected_button(DWORD a1, DWORD _EDX)
@@ -53,13 +59,12 @@ void CMSetupVFTables_Error_Inner()
 }
 
 static int __cdecl CustomMenu_Error_Inner(int a1) {
-	return CustomMenu_CallHead(a1, menu_vftable_1_Error_Inner, menu_vftable_2_Error_Inner, (DWORD)&widget_button_handler, 2, 272);
+	return CustomMenu_CallHead(a1, menu_vftable_1_Error_Inner, menu_vftable_2_Error_Inner, (DWORD)&widget_button_handler, 3, 272);
 }
 
 static void CustomMenuCall_Error_Inner() {
 	if (Title_Version == CLIENT_11122) {
-		int WgitScreenfunctionPtr = (int)(CustomMenu_Error_Inner);
-		CallWgit(WgitScreenfunctionPtr, 1);
+		CallWidget(CustomMenu_Error_Inner);
 	}
 	char* lblTitle = H2CustomLanguageGetLabel(CMLabelMenuId_Error, 0xFFFFFFF0);
 	char* lblDesc = H2CustomLanguageGetLabel(CMLabelMenuId_Error, 0xFFFFFFF1);
@@ -118,8 +123,7 @@ static int __cdecl CustomMenu_Error_Outer(int a1) {
 
 static void CustomMenuCall_Error_Outer() {
 	if (Title_Version == CLIENT_11122) {
-		int WgitScreenfunctionPtr = (int)(CustomMenu_Error_Outer);
-		CallWgit(WgitScreenfunctionPtr, 0);
+		CallWidget(CustomMenu_Error_Outer);
 	}
 	char* lblTitle = H2CustomLanguageGetLabel(CMLabelMenuId_Error, 0xFFFFFFF0);
 	char* lblDesc = H2CustomLanguageGetLabel(CMLabelMenuId_Error, 0xFFFFFFF1);

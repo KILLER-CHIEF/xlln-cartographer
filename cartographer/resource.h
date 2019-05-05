@@ -14,7 +14,7 @@
 #endif
 
 #define DLL_VERSION_MAJOR       0
-#define DLL_VERSION_MINOR       5
+#define DLL_VERSION_MINOR       6
 #define DLL_VERSION_REVISION    1
 #define DLL_VERSION_BUILD       1
 

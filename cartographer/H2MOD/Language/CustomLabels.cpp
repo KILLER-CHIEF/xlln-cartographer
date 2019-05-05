@@ -11,7 +11,7 @@ const int CMLabelMenuId_Credits =				0xFF000006;
 const int CMLabelMenuId_EditHudGui =			0xFF000007;
 const int CMLabelMenuId_ToggleSkulls =			0xFF000008;
 const int CMLabelMenuId_AccountList =			0xFF000009;
-const int CMLabelMenuId_AccountEdit =			0xFF00000A;
+const int CMLabelMenuId_AccountAdd =			0xFF00000A;
 const int CMLabelMenuId_VKeyTest =				0xFF00000B;
 const int CMLabelMenuId_AccountCreate =			0xFF00000C;
 const int CMLabelMenuId_OtherSettings =			0xFF00000D;
@@ -25,6 +25,8 @@ const int CMLabelMenuId_EditStaticLoD =			0xFF000014;
 const int CMLabelMenuId_EditCrosshairSize =		0xFF000015;
 const int CMLabelMenuId_AdvLobbySettings =		0xFF000016;
 const int CMLabelMenuId_Invalid_Login_Token =	0xFF000017;
+const int CMLabelMenuId_AccountManagement =		0xFF000018;
+const int CMLabelMenuId_NetworkType =			0xFF000019;
 
 BOOL InitCustomLabels()
 {
@@ -44,6 +46,8 @@ BOOL InitCustomLabels()
 	add_cartographer_label(CMLabelMenuId_Error, 7, "An error occured when trying to read the custom language file.\r\nNo Changes have been made.\r\nReview the on screen debug log for more details.");
 	add_cartographer_label(CMLabelMenuId_Error, 0x8, "Incomplete Feature");
 	add_cartographer_label(CMLabelMenuId_Error, 0x9, "This feature is incomplete.");
+	add_cartographer_label(CMLabelMenuId_Error, 0xA, "ERROR");
+	add_cartographer_label(CMLabelMenuId_Error, 0xB, "NULL Pointer");
 	add_cartographer_label(CMLabelMenuId_Error, 0xFFFFFF02, "Glitchy Scripts");
 	add_cartographer_label(CMLabelMenuId_Error, 0xFFFFFF03, "Created/reversed custom GUIs.\r\nCoded the entire account creation/login system.\r\nCreated Custom Languages.\r\nIs the Halo 2 Master Server overlord!");
 	add_cartographer_label(CMLabelMenuId_Error, 0xFFFFFF04, "PermaNull");
@@ -287,12 +291,12 @@ BOOL InitCustomLabels()
 	add_cartographer_label(CMLabelMenuId_Credits, 0xFFFFFFF0, "Credits");
 	add_cartographer_label(CMLabelMenuId_Credits, 0xFFFFFFF1, "Praise the Following.");
 	add_cartographer_label(CMLabelMenuId_Credits, 1, "--- The Devs ---");
-	add_cartographer_label(CMLabelMenuId_Credits, 2, "PermaNull");
-	add_cartographer_label(CMLabelMenuId_Credits, 3, "Glitchy Scripts");
-	add_cartographer_label(CMLabelMenuId_Credits, 4, "Himanshu01");
-	add_cartographer_label(CMLabelMenuId_Credits, 5, "Hootspa");
-	add_cartographer_label(CMLabelMenuId_Credits, 6, "NukeULater");
-	add_cartographer_label(CMLabelMenuId_Credits, 7, "Num005");
+	add_cartographer_label(CMLabelMenuId_Credits, 2, "Glitchy Scripts");
+	add_cartographer_label(CMLabelMenuId_Credits, 3, "Himanshu01");
+	add_cartographer_label(CMLabelMenuId_Credits, 4, "Hootspa");
+	add_cartographer_label(CMLabelMenuId_Credits, 5, "NukeULater");
+	add_cartographer_label(CMLabelMenuId_Credits, 6, "Num005");
+	add_cartographer_label(CMLabelMenuId_Credits, 7, "PermaNull");
 	add_cartographer_label(CMLabelMenuId_Credits, 8, "Rude Yoshi");
 	add_cartographer_label(CMLabelMenuId_Credits, 9, "Supersniper");
 	add_cartographer_label(CMLabelMenuId_Credits, 10, "--- Content Creators ---");
@@ -325,19 +329,19 @@ BOOL InitCustomLabels()
 	add_cartographer_label(CMLabelMenuId_AccountCreate, 4, "Create Account");
 
 
-	add_cartographer_label(CMLabelMenuId_AccountEdit, 0xFFFFFFF0, "Add Account");
-	add_cartographer_label(CMLabelMenuId_AccountEdit, 0xFFFFFFF1, "Enter your account's Username\r\n[or Email] and Password to Login.");
-	add_cartographer_label(CMLabelMenuId_AccountEdit, 0xFFFFFFF2, "-Remember me");
-	add_cartographer_label(CMLabelMenuId_AccountEdit, 0xFFFFFFF3, "-Don't remember me");
-	add_cartographer_label(CMLabelMenuId_AccountEdit, 0xFFFFFFF4, "[Username]");
-	add_cartographer_label(CMLabelMenuId_AccountEdit, 0xFFFFFFF5, "[Password]");
-	add_cartographer_label(CMLabelMenuId_AccountEdit, 0xFFFFF002, "Enter Account Username or Email Address");
-	add_cartographer_label(CMLabelMenuId_AccountEdit, 0xFFFFF003, "Enter the Username or Email Address of your account below.");
-	add_cartographer_label(CMLabelMenuId_AccountEdit, 0xFFFFF004, "Enter Account Password");
-	add_cartographer_label(CMLabelMenuId_AccountEdit, 0xFFFFF005, "Enter the Password of your account below.");
-	add_cartographer_label(CMLabelMenuId_AccountEdit, 1, 255 * 2, true);
-	add_cartographer_label(CMLabelMenuId_AccountEdit, 2, 255 * 2, true);
-	add_cartographer_label(CMLabelMenuId_AccountEdit, 4, "Login");
+	add_cartographer_label(CMLabelMenuId_AccountAdd, 0xFFFFFFF0, "Add Account");
+	add_cartographer_label(CMLabelMenuId_AccountAdd, 0xFFFFFFF1, "Enter your account's Username\r\n[or Email] and Password to Login.");
+	add_cartographer_label(CMLabelMenuId_AccountAdd, 0xFFFFFFF2, "-Remember me");
+	add_cartographer_label(CMLabelMenuId_AccountAdd, 0xFFFFFFF3, "-Don't remember me");
+	add_cartographer_label(CMLabelMenuId_AccountAdd, 0xFFFFFFF4, "[Username]");
+	add_cartographer_label(CMLabelMenuId_AccountAdd, 0xFFFFFFF5, "[Password]");
+	add_cartographer_label(CMLabelMenuId_AccountAdd, 0xFFFFF002, "Enter Account Username or Email Address");
+	add_cartographer_label(CMLabelMenuId_AccountAdd, 0xFFFFF003, "Enter the Username or Email Address of your account below.");
+	add_cartographer_label(CMLabelMenuId_AccountAdd, 0xFFFFF004, "Enter Account Password");
+	add_cartographer_label(CMLabelMenuId_AccountAdd, 0xFFFFF005, "Enter the Password of your account below.");
+	add_cartographer_label(CMLabelMenuId_AccountAdd, 1, 255 * 2, true);
+	add_cartographer_label(CMLabelMenuId_AccountAdd, 2, 255 * 2, true);
+	add_cartographer_label(CMLabelMenuId_AccountAdd, 4, "Login");
 
 
 	add_cartographer_label(CMLabelMenuId_AccountList, 0xFFFFFFF0, "Online Accounts");
@@ -348,14 +352,40 @@ BOOL InitCustomLabels()
 	add_cartographer_label(CMLabelMenuId_AccountList, 0xFFFF0003, ">Create Account");
 	add_cartographer_label(CMLabelMenuId_AccountList, 0xFFFF0004, ">Play Offline");
 	add_cartographer_label(CMLabelMenuId_AccountList, 0xFFFF0005, "<Unnamed>");
+	add_cartographer_label(CMLabelMenuId_AccountList, 0xFFFF0006, "Guest @ %s");
+
+
+	add_cartographer_label(CMLabelMenuId_AccountManagement, 0xFFFFFFF0, "Account Management");
+	add_cartographer_label(CMLabelMenuId_AccountManagement, 0xFFFFFFF1, "Select a player to login or logout with.");
+	add_cartographer_label(CMLabelMenuId_AccountManagement, 0xFFFF0001, "Logout P%d %hs @ %hs");
+	add_cartographer_label(CMLabelMenuId_AccountManagement, 0xFFFF0002, "Login P%d");
+	add_cartographer_label(CMLabelMenuId_AccountManagement, 0xFFFF0003, "Online");
+	add_cartographer_label(CMLabelMenuId_AccountManagement, 0xFFFF0004, "Offline");
 
 
 	add_cartographer_label(CMLabelMenuId_Guide, 0xFFFFFFF0, "Project Cartographer Guide");
 	add_cartographer_label(CMLabelMenuId_Guide, 0xFFFFFFF2, "Press the %s Key to open this guide from anywhere.");
 	add_cartographer_label(CMLabelMenuId_Guide, 1, "Advanced Settings");
-	add_cartographer_label(CMLabelMenuId_Guide, 2, "Website");
-	add_cartographer_label(CMLabelMenuId_Guide, 3, "Credits");
-	add_cartographer_label(CMLabelMenuId_Guide, 4, "Update");
+	add_cartographer_label(CMLabelMenuId_Guide, 2, "Account Management");
+	add_cartographer_label(CMLabelMenuId_Guide, 3, "Website");
+	add_cartographer_label(CMLabelMenuId_Guide, 4, "Credits");
+	add_cartographer_label(CMLabelMenuId_Guide, 5, "XLiveLessNess");
+	add_cartographer_label(CMLabelMenuId_Guide, 6, "Update");
+
+
+	add_cartographer_label(CMLabelMenuId_NetworkType, 0xFFFFFFF0, "Local Network Type");
+	add_cartographer_label(CMLabelMenuId_NetworkType, 0xFFFFFFF1, "Select the type of network game browser to use.");
+	add_cartographer_label(CMLabelMenuId_NetworkType, 0xFFFFFFF2, "Online Network Type");
+	add_cartographer_label(CMLabelMenuId_NetworkType, 0xFFFFFFF3, "Select the type of network game browser to use.");
+	add_cartographer_label(CMLabelMenuId_NetworkType, 1, "LIVE Online");
+	add_cartographer_label(CMLabelMenuId_NetworkType, 2, "LAN Online");
+	add_cartographer_label(CMLabelMenuId_NetworkType, 3, "Direct IP");
+	add_cartographer_label(CMLabelMenuId_NetworkType, 11, "LIVE Over LAN");
+	add_cartographer_label(CMLabelMenuId_NetworkType, 12, "LAN Local");
+	add_cartographer_label(CMLabelMenuId_NetworkType, 13, "Direct IP");
+	add_cartographer_label(CMLabelMenuId_NetworkType, 0xFFFFFF02, "Direct IP");
+	add_cartographer_label(CMLabelMenuId_NetworkType, 0xFFFFFF03, "Enter the IP address and the base-port of the desired host in the format ip:port.");
+	add_cartographer_label(CMLabelMenuId_NetworkType, 0xFFFFF001, 22 * sizeof(wchar_t), true);
 
 	return TRUE;
 }

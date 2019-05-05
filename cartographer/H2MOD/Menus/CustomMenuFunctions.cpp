@@ -13,72 +13,51 @@ BOOL InitCMFunctions()
 void __stdcall sub_2101a4_CMLTD(int thisptr, int label_id, wchar_t* rtn_label, int label_menu_id);
 char __stdcall sub_21bb0b_CMLTD(void* thisptr, __int16 a2, int* aa3, int label_menu_id, int label_id_description);
 
-static std::chrono::time_point<std::chrono::system_clock> lastOuterMenuUse;
-static int lastOuterMenuFuncPtr = 0;
+#pragma pack(push) // Save current alignment setting.
+#pragma pack(1) // Specify single-byte alignment.
+typedef struct {
+	WORD Ukn1;
+	WORD Ukn2;
+	DWORD Ukn3;
+	DWORD Ukn4;
+	DWORD Ukn5;
+	DWORD Ukn6;
+	DWORD Ukn7;
+	DWORD Ukn8;
+	void*(__cdecl *WgitFnPtr)(void*);
+} MENU_SETUP;
+#pragma pack(pop) // Return to original alignment setting.
 
-void CallWgit(int WgitScreenfunctionPtr) {
-	CallWgit(WgitScreenfunctionPtr, 1, 0);
-}
+VOID CallWidget(void *wgitFnPtr, bool history)
+{
+	//CM_CloseMenu function doesn't work with history off
+	MENU_SETUP menu_setup;
+	menu_setup.Ukn1 = history ? 0 : 3; // 0,1 remember history, 2,3,4,-1 don't remember
+	menu_setup.Ukn2 = 1;
+	menu_setup.Ukn3 = 4;
+	//menu_setup.Ukn3 = 5;// 5 ingame, 5 mainmenu options, 4 press any key / pregame
+	menu_setup.Ukn4 = 4;// 0 ingame, 4 mainmenu
+	menu_setup.Ukn5 = 0;
+	menu_setup.Ukn6 = -1;
+	menu_setup.Ukn7 = -1;
+	menu_setup.Ukn8 = -1;
+	menu_setup.WgitFnPtr = (void*(__cdecl*)(void*))wgitFnPtr;
 
-void CallWgit(int WgitScreenfunctionPtr, int open_method2) {
-	CallWgit(WgitScreenfunctionPtr, open_method2, 0);
-}
-
-static int prevOpenMethod = 3;
-//bool hacked21 = false;
-void CallWgit(int WgitScreenfunctionPtr, int open_method2, int menu_wgit_type) {
-	//int(__thiscall*WgitInitialize)(void*) = (int(__thiscall*)(void*))((char*)H2BaseAddr + 0x20B0BC);
-	signed int(__thiscall*WgitLoad)(void*, __int16, int, int, int) = (signed int(__thiscall*)(void*, __int16, int, int, int))((char*)H2BaseAddr + 0x20C226);
-	//0x0020C258 is another one.
-	//void*(__thiscall*WgitFinalize)(void*) = (void*(__thiscall*)(void*))((char*)H2BaseAddr + 0x20B11E);
-
-	int open_method = open_method2;
-	if (open_method == 1) {
-		open_method = prevOpenMethod;
-	}
-	else if (open_method == 2) {
-		int CurrentWgitID = *(int*)((BYTE*)H2BaseAddr + 0x9758D8);
-		if (menu_wgit_type == 0) {
-			open_method = 3;
-		}
-		else if (lastOuterMenuFuncPtr > 0 && lastOuterMenuFuncPtr == WgitScreenfunctionPtr) {
-			if (CurrentWgitID != menu_wgit_type) {
-				std::chrono::milliseconds difference = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - lastOuterMenuUse);
-				long long timeDiff = difference.count();
-				if (timeDiff < 1500) {
-					open_method = 3;
-					//hacked21 = true;
-				}
-			}
-			//else if (hacked21) {
-			//	return;
-			//}
+	int GameGlobals = (int)*(int*)((char*)H2BaseAddr + 0x482D3C);
+	if (GameGlobals) {
+		BYTE& EngineMode = *(BYTE*)(GameGlobals + 0x8);
+		if (EngineMode != 3) {
+			menu_setup.Ukn4 = 0;
 		}
 	}
-	lastOuterMenuFuncPtr = WgitScreenfunctionPtr;
-	lastOuterMenuUse = std::chrono::system_clock::now();
-	prevOpenMethod = open_method;
 
-	//char* menu_setup = (char*)malloc(sizeof(char) * 0x20);
-	//WgitInitialize(menu_setup);
-	DWORD menu_setup[8];
-	menu_setup[3] = 0;
+	void* menu_struct = menu_setup.WgitFnPtr(&menu_setup);
+	return;
+}
 
-	switch (open_method) {
-	case 3:
-		WgitLoad(menu_setup, 1, 3, 4, WgitScreenfunctionPtr);
-		break;
-	case 0:
-	default:
-		WgitLoad(menu_setup, 1, 5, 4, WgitScreenfunctionPtr);
-	}
-
-	void*(__cdecl *MenuHeadSetup)(DWORD*) = (void*(__cdecl*)(DWORD*))menu_setup[7];
-	void* menu_struct = MenuHeadSetup(menu_setup);
-
-	//void* menu_struct = WgitFinalize(menu_setup);
-
-	//free(menu_setup);
+VOID CallWidget(void *wgitFnPtr)
+{
+	return CallWidget(wgitFnPtr, true);
 }
 
 static int nak_keyHandler_CM_thisptr;
@@ -196,6 +175,76 @@ void CMSetupVFTables(DWORD** menu_vftable_1, DWORD** menu_vftable_2, DWORD CM_La
 		*(DWORD*)((DWORD)*menu_vftable_2 + 0x98) = (DWORD)CM_FuncPtrHelper;
 }
 
+int __stdcall CM_CloseMenu(void *thisptr)
+{
+	int(__cdecl* sub_002096da)(int a1, int a2) = (int(__cdecl*)(int, int))GetOffsetAddress(CLIENT_11122, 0x002096da);
+	int v4 = (*(int(__thiscall **)(void *))(*(DWORD *)thisptr + 56))(thisptr);
+	int v5 = (*(int(__thiscall **)(void *))(*(DWORD *)thisptr + 52))(thisptr);
+	int result = sub_002096da(v5, v4);
+	return result;
+}
+
+int __stdcall CM_PressButtonAnimation(void *thisptr)
+{
+	WORD*(__thiscall* sub_00211ba1)(DWORD *a1) = (WORD*(__thiscall*)(DWORD*))GetOffsetAddress(CLIENT_11122, 0x00211ba1);
+	int(__thiscall* sub_00212604)(unsigned __int16 *a1, int) = (int(__thiscall*)(unsigned __int16 *, int))GetOffsetAddress(CLIENT_11122, 0x00212604);
+	unsigned __int16 *dumb = sub_00211ba1((DWORD*)thisptr);
+	int result = sub_00212604(dumb, 4);
+	// 0,1 - reload menu
+	// 2,3 - close/hide all menus (at the mainmenu if you open another menu then go back everything from the previous menu stack comes back)
+	// 4 - button press animation
+	// 5,6,7 - highlight all
+	return result;
+}
+
+void __stdcall CM_CloseMenuStack()
+{
+	DWORD d = GetOffsetAddress(CLIENT_11122, 0x00971d24);
+	DWORD &d8 = *(DWORD*)(d + (0x44 * 4) + 0x8);
+	DWORD &dc = *(DWORD*)(d + (0x44 * 4) + 0xc);
+	DWORD &d30 = *(DWORD*)(d + (0x44 * 4) + 0x30);
+
+	int(__cdecl* sub_002096da)(int a1, int a2) = (int(__cdecl*)(int, int))GetOffsetAddress(CLIENT_11122, 0x002096da);
+	if (d8 || d30) {
+		while (d8 || d30) {
+			sub_002096da(4, 4);
+		}
+		d8 = dc;
+		while (d8 || dc || d30) {
+			sub_002096da(4, 4);
+		}
+	}
+}
+
+//int __fastcall sub_250DD8(void *thisptr, DWORD _EDX, int a2, DWORD *a3)//__thiscall
+int __stdcall sub_250DD8_ClickHandler2(void *thisptr, bool closeMenu)
+{
+	int(__cdecl* sub_002096da)(int a1, int a2) = (int(__cdecl*)(int, int))GetOffsetAddress(CLIENT_11122, 0x002096da);
+	int result = closeMenu;
+	if (closeMenu) {
+		int v4 = (*(int(__thiscall **)(void *))(*(DWORD *)thisptr + 56))(thisptr);
+		int v5 = (*(int(__thiscall **)(void *))(*(DWORD *)thisptr + 52))(thisptr);
+		result = sub_002096da(v5, v4);
+	}
+	return result;
+	/*
+	WORD*(__thiscall* sub_00211ba1)(DWORD *a1) = (WORD*(__thiscall*)(DWORD*))GetOffsetAddress(CLIENT_11122, 0x00211ba1);
+	int(__thiscall* sub_00212604)(unsigned __int16 *a1, int) = (int(__thiscall*)(unsigned __int16 *, int))GetOffsetAddress(CLIENT_11122, 0x00212604);
+
+	int result = closeMenu;
+	int GameGlobals = (int)*(int*)((char*)H2BaseAddr + 0x482D3C);
+	if (result && GameGlobals) {
+		BYTE& EngineMode = *(BYTE*)(GameGlobals + 0x8);
+		if (EngineMode != 3) {
+			
+		}
+		else {
+			
+		}
+	}
+	return result;*/
+}
+
 static int __cdecl sub_250E22_CM(int thisptr, int a2, DWORD* menu_vftable_1, DWORD menu_button_handler, int number_of_buttons)
 {
 	void*(__thiscall* sub_213B1C)(int, int) = (void*(__thiscall*)(int, int))((char*)H2BaseAddr + 0x213B1C);
@@ -206,6 +255,7 @@ static int __cdecl sub_250E22_CM(int thisptr, int a2, DWORD* menu_vftable_1, DWO
 	int(__cdecl* sub_66B33)(int) = (int(__cdecl*)(int))((char*)H2BaseAddr + 0x66B33);
 	int(__cdecl* sub_667A0)(int) = (int(__cdecl*)(int))((char*)H2BaseAddr + 0x667A0);
 	void*(__thiscall* sub_2113D3)(int, int) = (void*(__thiscall*)(int, int))((char*)H2BaseAddr + 0x2113D3);
+	DWORD*& var_003d9700 = *(DWORD**)(GetOffsetAddress(CLIENT_11122, 0x003d9700));
 
 	int v5; // eax@4
 	int v2 = thisptr;
@@ -223,8 +273,7 @@ static int __cdecl sub_250E22_CM(int thisptr, int a2, DWORD* menu_vftable_1, DWO
 
 	sub_2113C6((int)((char*)v2 + 712));
 
-	//*((DWORD*)v2 + 177) = &off_1229700;
-	*((DWORD*)v2 + 177) = 0;
+	*((DWORD*)v2 + 177) = (DWORD)&var_003d9700;
 
 	*((DWORD*)v2 + 181) = (DWORD)v2;
 
@@ -297,10 +346,10 @@ int __stdcall sub_20F790_CM(int thisptr, __int16 selected_button_id)
 	return sub_20F790(thisptr);
 }
 
-void* __stdcall sub_248beb_deconstructor(LPVOID lpMem, char a2)//__thiscall
+void* __fastcall sub_248beb_deconstructor(LPVOID lpMem, DWORD _EDX, char a2)
 {
-	int(__thiscall* sub_248b90)(void*) = (int(__thiscall*)(void*))((char*)H2BaseAddr + 0x248b90);
-	int(__cdecl* sub_287c23)(void*) = (int(__cdecl*)(void*))((char*)H2BaseAddr + 0x287c23);
+	int(__thiscall* sub_248b90)(void*) = (int(__thiscall*)(void*))GetOffsetAddress(CLIENT_11122, 0x248b90);
+	int(__cdecl* sub_287c23)(void*) = (int(__cdecl*)(void*))GetOffsetAddress(CLIENT_11122, 0x287c23);
 
 	sub_248b90((void*)lpMem);
 	if (a2 & 1) {

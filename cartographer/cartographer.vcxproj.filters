@@ -49,9 +49,18 @@
     <Filter Include="Source Files\H2MOD\Menus\AdvSettings\Language">
       <UniqueIdentifier>{90db689a-2a7a-49d9-83b7-b68deee2cd6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\H2MOD\Menus\Accounts">
+      <UniqueIdentifier>{5cbfcd6c-4227-409d-8e01-cb1a0dd76227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\H2MOD\RunLoop">
+      <UniqueIdentifier>{d0260140-3587-433a-a412-5c7a8d929bd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\H2MOD\Menus\NetworkType">
+      <UniqueIdentifier>{deb28a6e-baa5-4fe6-a1ac-d7909e4c0ba8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.cpp">
+    <ClCompile Include="dllMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="xlive\xlive.cpp">
@@ -101,6 +110,30 @@
     </ClCompile>
     <ClCompile Include="H2MOD\Menus\AdvSettings\Language\LanguageSub.cpp">
       <Filter>Source Files\H2MOD\Menus\AdvSettings\Language</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Menus\Accounts\AccountManagement.cpp">
+      <Filter>Source Files\H2MOD\Menus\Accounts</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Menus\Accounts\AccountList.cpp">
+      <Filter>Source Files\H2MOD\Menus\Accounts</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Menus\Accounts\AccountCreate.cpp">
+      <Filter>Source Files\H2MOD\Menus\Accounts</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Menus\Accounts\AccountAdd.cpp">
+      <Filter>Source Files\H2MOD\Menus\Accounts</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Config\Accounts.cpp">
+      <Filter>Source Files\H2MOD\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Menus\Accounts\AccountHelper.cpp">
+      <Filter>Source Files\H2MOD\Menus\Accounts</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\RunLoop\RunLoop.cpp">
+      <Filter>Source Files\H2MOD\RunLoop</Filter>
+    </ClCompile>
+    <ClCompile Include="H2MOD\Menus\NetworkType\NetworkType.cpp">
+      <Filter>Source Files\H2MOD\Menus\NetworkType</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +190,30 @@
     </ClInclude>
     <ClInclude Include="H2MOD\Menus\AdvSettings\Language\LanguageSub.h">
       <Filter>Source Files\H2MOD\Menus\AdvSettings\Language</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Menus\Accounts\AccountManagement.h">
+      <Filter>Source Files\H2MOD\Menus\Accounts</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Menus\Accounts\AccountList.h">
+      <Filter>Source Files\H2MOD\Menus\Accounts</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Menus\Accounts\AccountCreate.h">
+      <Filter>Source Files\H2MOD\Menus\Accounts</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Menus\Accounts\AccountAdd.h">
+      <Filter>Source Files\H2MOD\Menus\Accounts</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Config\Accounts.h">
+      <Filter>Source Files\H2MOD\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Menus\Accounts\AccountHelper.h">
+      <Filter>Source Files\H2MOD\Menus\Accounts</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\RunLoop\RunLoop.h">
+      <Filter>Source Files\H2MOD\RunLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="H2MOD\Menus\NetworkType\NetworkType.h">
+      <Filter>Source Files\H2MOD\Menus\NetworkType</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
